@@ -12,7 +12,7 @@ The **HeritSeq** package provides heritability score analyses under linear mixed
 
 See [1] for model details and performance comparisons. 
 
-[1]: Rudra, P., Shi, W. J., Vestal, B., Russell, P. H., Odell, A., Dowell, R., Radcliffe, R., Saba, L. M., & Kechris, K. *Model based heritability scores for high-throughput sequencing data*. (submitted). 
+[1]: Rudra, P., Shi, W. J., Vestal, B., Russell, P. H., Odell, A., Dowell, R., Radcliffe, R., Saba, L. M., & Kechris, K. *Model based heritability scores for high-throughput sequencing data*. BMC bioinformatics 18.1 (2017): 143.
 
 ## Example dataset
 The **HeritSeq** package includes an example high-throughput sequencing dataset 
