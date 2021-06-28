@@ -1,5 +1,7 @@
 ---
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## Overview
@@ -12,9 +14,7 @@ The **HeritSeq** package provides heritability score analyses under linear mixed
 
 See [1] for model details and performance comparisons. 
 
-[1]: Rudra, P., Shi, W. J., Vestal, B., Russell, P. H., Odell, A., Dowell, R., Radcliffe, R., Saba, L. M., & Kechris, K. *Model based heritability scores for high-throughput sequencing data*. BMC bioinformatics 18.1 (2017): 143.
-
-The package can be downloaded from CRAN https://CRAN.R-project.org/package=HeritSeq.
+[1]: Rudra, P., Shi, W. J., Vestal, B., Russell, P. H., Odell, A., Dowell, R., Radcliffe, R., Saba, L. M., & Kechris, K. *Model based heritability scores for high-throughput sequencing data*. (submitted). 
 
 ## Example dataset
 The **HeritSeq** package includes an example high-throughput sequencing dataset 
@@ -39,9 +39,10 @@ install.packages("glmmADMB",
                         getOption("repos")),
                 type="source")
 
-source("https://bioconductor.org/biocLite.R")
-biocLite("DESeq2")
-biocLite("SummarizedExperiment")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+install.packages("BiocManager")
+BiocManager::install("DESeq2")
+BiocManager::install("SummarizedExperiment")
 ```
 
 For some systems an [alternative installation]( http://glmmadmb.r-forge.r-project.org/ ) might be needed for the glmmADMB package.  
@@ -49,10 +50,10 @@ For some systems an [alternative installation]( http://glmmadmb.r-forge.r-projec
 Since R for OS X Maverick (and latter versions) was compiled using gfortran-4.8, Mac users might receive a “-lgfortran” error when installing the cplm package. This problem and its solution are stated [here]( http://thecoatlessprofessor.com/programming/rcpp-rcpparmadillo-and-os-x-mavericks-lgfortran-and-lquadmath-error/).
 
 
-Next, download the [package tarball](https://github.com/KechrisLab/HeritSeq/blob/master/package/HeritSeq_1.0.0.tar.gz) and install the package:
+Next, download the [package tarball](https://github.com/KechrisLab/HeritSeq/blob/master/package/HeritSeq_1.0.2.tar.gz) and install the package:
 
 ```{r, eval = FALSE}
-install.packages("HeritSeq_1.0.0.tar.gz",repos=NULL,type="source")
+install.packages("HeritSeq_1.0.2.tar.gz",repos=NULL,type="source")
 library("HeritSeq")
 ```
 ```{r, echo = FALSE}
@@ -162,6 +163,7 @@ Note that the voom method does provide a prior weight for fitting the regression
 ### Compare results from various methods
 In most cases, it is not clear which method is more appropriate for the given dataset. We suggest to fit multiple models and compare the estimation results. 
 ```{r, eval = FALSE}
+install.packages('psych')
 library(psych)
 h2 <- cbind(vpc.nb, vpc.cp, vpc.vst, vpc.voom)
 colnames(h2) <- c("NB", "CP", "VST", "voom")
@@ -251,9 +253,9 @@ All the model fitting functions: *fit.NB( )*, *fit.CP( )*, and *fitComputeVPC.lm
 
 
 ## Versioning
-Date: 2017-1-2
+Date: 2021-06-27
 
-**Version: 1.0.0**
+**Version: 1.0.2**
 
 
 ## Acknowledgements
