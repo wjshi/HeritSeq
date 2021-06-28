@@ -12,13 +12,17 @@
 #install.packages("pbapply", repos="http://cran.r-project.org")
 #install.packages("statmod", repos="http://cran.r-project.org")
 
-#install.packages("R2admb")
-# install.packages("glmmADMB", 
+# install.packages("R2admb")
+# install.packages("glmmADMB",
 #                 repos=c("http://glmmadmb.r-forge.r-project.org/repos",
 #                         getOption("repos")),
 #                 type="source")
-# source("https://bioconductor.org/biocLite.R")
-# biocLite("DESeq2")
+
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+# install.packages("BiocManager")
+# BiocManager::install("DESeq2")
+# BiocManager::install("SummarizedExperiment")
+
 
 requireNamespace("lme4", quietly = TRUE)
 requireNamespace("tweedie", quietly = TRUE)
@@ -313,7 +317,8 @@ fit.NB <- function(CountMatrix, Strains, test = FALSE){
     }, error = function(err){
       print(paste('Using alt method for', GeneID))
       model_sub <- try({lme4::glmer.nb(formula = expr ~ 1 + (1|strain), 
-                                       data = dat_sub, verbose = F)}, silent=T)
+                                       data = dat_sub, verbose = F,
+                                       tol = 1e-4)}, silent=T)
       
       if (class(model_sub) != "try-error"){
         sum_model_sub <- summary(model_sub)
